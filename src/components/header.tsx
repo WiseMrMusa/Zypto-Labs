@@ -5,7 +5,7 @@ export default function Header(){
     return(
         <div>
             
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-50 flex justify-between py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative flex justify-between py-8">
         <NavBar />
         <ConnectKitButton showAvatar={true} />
      </div>

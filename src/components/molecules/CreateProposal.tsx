@@ -12,7 +12,6 @@ const CreateProposal = () => {
     const [_period, _setPeriod] = useState<number>();
     const [_calldata, _setCalldata] = useState<string>();
 
-
     const { data: tokenData, isError: tokenDataError, error: tokenError } = useToken({
         address: _tokenAddress,
     })
@@ -50,10 +49,9 @@ const CreateProposal = () => {
     }
 
     return (
-
         <main>
             <div
-                className="mt-10 flex flex-col rounded-2xl border border-zinc-100 p-8 w-3/5 mx-auto gap-8 transition-colors "
+                className=" flex flex-col rounded-2xl p-8 w-4/5 mx-auto gap-8 transition-colors "
             >
                 <div
                     className="flex flex-col gap-4 text-gray-600"
@@ -89,7 +87,6 @@ const CreateProposal = () => {
                             </div>
                         }
                     </div>
-
                     <div className="flex col-2 gap-8 w-100">
                         <div className="flex flex-col gap-4 grow">
                             <label className="">Price</label>
