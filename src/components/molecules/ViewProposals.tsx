@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-import NewProposalModal from "./NewProposalModal";
+import NewProposalModal from "../modals/NewProposalModal";
 import { type ProposalType } from "@/server/api/routers/proposals";
 
 export const ViewProposals = ({ proposals }: { proposals: ProposalType }) => {

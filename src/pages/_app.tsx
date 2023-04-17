@@ -30,7 +30,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <WagmiConfig client={client}>
-
       <siweClient.Provider>
         <ConnectKitProvider>
           <ContractProvider>

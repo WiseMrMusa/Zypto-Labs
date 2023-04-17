@@ -1,4 +1,5 @@
-import NewProposalModal from "@/components/molecules/NewProposalModal";
+import NewProposalModal from "@/components/modals/NewProposalModal";
+import DelegateVote from "@/components/molecules/DelegateVote";
 import { ViewProposals } from "@/components/molecules/ViewProposals";
 import { api } from "@/utils/api";
 
@@ -13,7 +14,7 @@ export default function Page(){
                 <div className="flex gap-4 ">
                     <button className="inline-flex justify-center rounded-lg border py-[calc(theme(spacing.2)-1px)] px-[calc(theme(spacing.3)-1px)] text-sm outline-2 outline-offset-2 transition-colors border-gray-300 text-gray-700 hover:border-gray-400 active:bg-gray-100 active:text-gray-700/80 lg:block">Settings</button>
                     <NewProposalModal />
-                    <button className="inline-flex justify-center rounded-lg py-2 px-3 text-sm font-semibold outline-2 outline-offset-2 transition-colors bg-gray-800 text-white hover:bg-gray-900 active:bg-gray-800 active:text-white/80 lg:block">Delegate Vote</button>
+                    <DelegateVote />
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
-import CreateProposal from './CreateProposal'
+import CreateProposal from '../molecules/CreateProposal'
 
 export default function NewProposalModal() {
     const [isOpen, setIsOpen] = useState(false)
@@ -26,7 +26,7 @@ export default function NewProposalModal() {
             </div>
 
             <Transition appear show={isOpen} as={Fragment}>
-                <Dialog as="div" className="relative z-10" onClose={closeModal}>
+                <Dialog as="div" className="relative" onClose={closeModal}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -50,7 +50,7 @@ export default function NewProposalModal() {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-2/4 z-50 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-2/4 z-30 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                     <div className="flex justify-end">
                                         <button
                                             type="button"
