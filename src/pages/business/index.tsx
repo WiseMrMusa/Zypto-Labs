@@ -1,4 +1,34 @@
 // import Image from "next/image";
+import type { GetServerSideProps } from "next";
+import { siweServer } from "@/utils/siweServer";
+
+// const walletHasToken = async (address: string): Promise<boolean> => {
+//     // await address;
+//     await api.example.hello;
+//     return true// Your implementation of token-gated logic goes here
+// }
+const walletHasToken = (): boolean => {
+    // await address;
+    return true// Your implementation of token-gated logic goes here
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+    const { address } = await siweServer.getSession(req, res);
+
+    if (!address || !(walletHasToken())) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: '/', // Redirect if wallet does not have the required token
+            },
+        };
+    }
+
+    return {
+        props: {},
+    };
+}
+
 
 export default function Page(){
     return(
