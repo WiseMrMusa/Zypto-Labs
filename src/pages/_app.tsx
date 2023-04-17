@@ -1,6 +1,5 @@
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 
 import { api } from "@/utils/api";
 
@@ -27,22 +26,20 @@ const client = createClient(
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { ...pageProps },
 }) => {
   return (
     <WagmiConfig client={client}>
 
-      {/* <SessionProvider session={session}> */}
       <siweClient.Provider>
         <ConnectKitProvider>
           <ContractProvider>
             <Layout>
-              <Component {...pageProps} />
+              <Component { ...pageProps} />
             </Layout>
           </ContractProvider>
         </ConnectKitProvider>
       </siweClient.Provider>
-      {/* </SessionProvider> */}
     </WagmiConfig>
   );
 };

@@ -1,9 +1,9 @@
 "use client"
 import { useState } from 'react'
-import { RadioGroup, Transition } from '@headlessui/react'
+import { RadioGroup} from '@headlessui/react'
 
 export function ChoosePlan() {
-    let [plan, setPlan] = useState('monthly')
+    const [plan, setPlan] = useState('monthly')
 
     return (
 

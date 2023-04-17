@@ -1,8 +1,7 @@
+import type { ProposalType } from "@/pages/proposals";
 import Link from "next/link";
 
-export const ViewProposals = ({ proposals }: { proposals: any }) => {
-    console.log("001")
-    console.log(proposals)
+export const ViewProposals = ({ proposals }: { proposals: ProposalType }) => {
     return (
         <div className="relative rounded-xl overflow-auto">
             <div className="shadow-sm overflow-hidden">
@@ -33,8 +32,8 @@ export const ViewProposals = ({ proposals }: { proposals: any }) => {
                         </tr>
                     </thead>
                     <tbody className="bg-white ">
-                        {proposals?.map((proposal: any, index: any) => {
-                            const forPercent = proposal.voteStats[0].percent.toFixed();
+                        {proposals?.map((proposal, index) => {
+                            const forPercent = proposal.voteStats[0]?.percent.toFixed();
 
                             return (
                                 <tr key={`proposal-row-${index}`}>
@@ -43,9 +42,9 @@ export const ViewProposals = ({ proposals }: { proposals: any }) => {
                                         {proposal.title}
                                     </Link>
                                         </td>
-                                    <td className='border-b border-slate-100  p-4 pl-8 text-slate-500 '>{proposal.voteStats[0].votes}</td>
-                                    <td className='border-b border-slate-100  p-4 pl-8 text-slate-500 '>{proposal.voteStats[1].votes}</td>
-                                    <td className='border-b border-slate-100  p-4 pl-8 text-slate-500 '>{proposal.voteStats[2].votes}</td>
+                                    <td className='border-b border-slate-100  p-4 pl-8 text-slate-500 '>{proposal.voteStats[0]?.votes}</td>
+                                    <td className='border-b border-slate-100  p-4 pl-8 text-slate-500 '>{proposal.voteStats[1]?.votes}</td>
+                                    <td className='border-b border-slate-100  p-4 pl-8 text-slate-500 '>{proposal.voteStats[2]?.votes}</td>
                                     <td className='border-b border-slate-100  p-4 pl-8 text-slate-500 '>{forPercent}</td>
                                 </tr>
                             );
