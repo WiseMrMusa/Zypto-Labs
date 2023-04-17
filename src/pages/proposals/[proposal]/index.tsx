@@ -1,9 +1,8 @@
 'use client'
 import DisplayVotes from "@/components/molecules/DisplayVote";
-import { useParams } from "next/navigation"
+
 
 export default function Page() {
-    const { proposal } = useParams();
     return (
         <div className="flex flex-col">
             <div className="flex justify-between bg-white p-4 ring-1 ring-slate-300 w-full rounded-md mt-6 ">
