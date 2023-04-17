@@ -3,8 +3,6 @@ import { type Address, useContractWrite, usePrepareContractWrite, useToken } fro
 import governorABI from '@/utils/abis/governanceABI.json'
 import { ethers } from "ethers";
 import { ContractContext } from '@/context/ContractContext';
-import { describe } from 'node:test';
-import { Description } from '@headlessui/react/dist/components/description/description';
 
 const CreateProposal = () => {
     const [_proposalName, _setProposalName] = useState<string>();
@@ -19,10 +17,11 @@ const CreateProposal = () => {
         address: _tokenAddress,
     })
 
-    const abiCoder = new ethers.utils.AbiCoder();
     const GovernorContract = useContext(ContractContext);
-
-    useEffect(() => {
+    
+    useEffect(
+        () => {
+            const abiCoder = new ethers.utils.AbiCoder();
         if (_tokenAddress) {
             try {
                 const well = abiCoder.encode(["address", "uint256", "uint256"], [_tokenAddress, _price, _period]);
@@ -31,7 +30,7 @@ const CreateProposal = () => {
                 console.log(error);
             }
         }
-    }, [_tokenAddress, _price, _period, abiCoder])
+    }, [_tokenAddress, _price, _period])
 
     const { config, error, isError } = usePrepareContractWrite({
         address: GovernorContract,
