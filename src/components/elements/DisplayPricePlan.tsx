@@ -1,7 +1,6 @@
 import { ContractContext } from "@/context/ContractContext";
-import Link from "next/link";
 import { useContext, useState } from "react";
-import { Address, useContractRead, usePrepareContractWrite, useContractWrite } from "wagmi";
+import { type Address, useContractRead, usePrepareContractWrite, useContractWrite } from "wagmi";
 import governanceABI from "@/utils/abis/governanceABI.json";
 import erc20vote from "@/utils/abis/erc20vote.json"
 
@@ -27,16 +26,22 @@ export function DisplayPricePlan({ plan, price, description, buttonLabel, benefi
         functionName: 'token',
         chainId: 80001,
         onSuccess(data) {
-            setTokenAddress(data as unknown as Address)
+            setTokenAddress(data as Address)
         }
     })
 
-    const { config, error, isError } = usePrepareContractWrite({
+    const { config } = usePrepareContractWrite({
         address: tokenAddress,
         abi: erc20vote,
         functionName: 'mint',
     })
-    const { data, isLoading, isSuccess, write } = useContractWrite(config)
+    // const { config, error, isError } = usePrepareContractWrite({
+    //     address: tokenAddress,
+    //     abi: erc20vote,
+    //     functionName: 'mint',
+    // })
+
+    const { write } = useContractWrite(config)
 
     const handleSubmit = () => {
         write?.();
