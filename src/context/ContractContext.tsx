@@ -1,6 +1,7 @@
 import { createContext } from "react";
+import type { Address } from "wagmi";
 
-export const ContractContext = createContext("");
+export const ContractContext = createContext<Address>("0x");
 
 export function ContractProvider({ children }: { children : React.ReactNode}) {
     return (

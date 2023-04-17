@@ -1,4 +1,9 @@
+import { ContractContext } from "@/context/ContractContext";
 import Link from "next/link";
+import { useContext, useState } from "react";
+import { Address, useContractRead, usePrepareContractWrite, useContractWrite } from "wagmi";
+import governanceABI from "@/utils/abis/governanceABI.json";
+import erc20vote from "@/utils/abis/erc20vote.json"
 
 export type PricePlan = {
     plan: string;
@@ -9,7 +14,38 @@ export type PricePlan = {
     special?: boolean;
 }
 
+
 export function DisplayPricePlan({ plan, price, description, buttonLabel, benefits, special }: PricePlan) {
+
+
+    const GovernorContract = useContext(ContractContext);
+
+    const [tokenAddress, setTokenAddress] = useState<Address>();
+    useContractRead({
+        address: GovernorContract,
+        abi: governanceABI,
+        functionName: 'token',
+        chainId: 80001,
+        onSuccess(data) {
+            setTokenAddress(data as unknown as Address)
+        }
+    })
+
+    const { config, error, isError } = usePrepareContractWrite({
+        address: tokenAddress,
+        abi: erc20vote,
+        functionName: 'mint',
+    })
+    const { data, isLoading, isSuccess, write } = useContractWrite(config)
+
+    const handleSubmit = () => {
+        write?.();
+    }
+
+
+
+
+
     return (
         <section
             className={`flex flex-col overflow-hidden rounded-3xl p-6 shadow-lg shadow-gray-900/5 ${special ? 'bg-gray-900' : 'bg-white'}`}>
@@ -44,11 +80,11 @@ export function DisplayPricePlan({ plan, price, description, buttonLabel, benefi
                 </ul>
             </div>
 
-            <Link
+            <button
                 className={`inline-flex justify-center rounded-lg py-2 px-3 text-sm font-semibold outline-2  outline-offset-2 transition-colors mt-6 ${special ? "bg-cyan-500 text-white active:bg-cyan-600 active:text-white/80" : "bg-gray-800 text-white hover:bg-gray-900 active:bg-gray-800 active:text-white/80"}`}
-                href="/"
+                onClick={handleSubmit}
             >{buttonLabel}
-            </Link>
+            </button>
         </section>
     )
 }
