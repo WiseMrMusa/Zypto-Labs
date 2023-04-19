@@ -1,9 +1,9 @@
 
 import Link from "next/link";
 import NewProposalModal from "../modals/NewProposalModal";
-import { type ProposalType } from "@/server/api/routers/proposals";
+import { type ProposalType } from "@/utils/types/proposalTypes";
 
-export const ViewProposals = ({ proposals }: { proposals: ProposalType }) => {
+export const ViewProposals = ({ proposals }: { proposals: ProposalType[] }) => {
     return (
         <div className="relative rounded-xl overflow-auto">
             <div className="shadow-sm overflow-hidden">
@@ -31,7 +31,7 @@ export const ViewProposals = ({ proposals }: { proposals: ProposalType }) => {
                         </tr>
                     </thead>
                     <tbody className="bg-white ">
-                        {proposals?.map((proposal, index) => {
+                        {proposals.map((proposal, index) => {
                             const forPercent = proposal.voteStats[0]?.percent.toFixed();
 
                             return (

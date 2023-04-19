@@ -1,11 +1,11 @@
 import NewProposalModal from "@/components/modals/NewProposalModal";
 import DelegateVote from "@/components/molecules/DelegateVote";
 import { ViewProposals } from "@/components/molecules/ViewProposals";
-import { api } from "@/utils/api";
+import useProposals from "@/hooks/useProposals";
 
 
 export default function Page(){
-    const okah = api.proposal.proposal.useQuery();
+    const okah = useProposals();
     return (
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col ">
@@ -34,8 +34,8 @@ export default function Page(){
             </div>
 
             <div className="flex justify-around bg-white p-4 ring-1 ring-slate-300 w-full rounded-md mt-6">
-                {okah.data 
-                    && <ViewProposals proposals={okah.data.proposals} />
+                {okah 
+                    && <ViewProposals proposals={okah} />
                 }
             </div>
 
