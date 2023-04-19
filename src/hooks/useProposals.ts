@@ -44,7 +44,7 @@ export default function useProposals() {
                     governanceContract
                 ],
                 "sort": { "field": "START_BLOCK", "order": "DESC" },
-                "pagination": { "limit": 4, "offset": 0 }
+                "pagination": { "limit": 8, "offset": 0 }
             };
             
             const options = {
