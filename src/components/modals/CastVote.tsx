@@ -101,7 +101,7 @@ function CheckIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
 }
 
 
-export default function CastVote({proposalId}: {proposalId: number}) {
+export default function CastVote({proposalId}: {proposalId: string}) {
     const [isOpen, setIsOpen] = useState(false);
 
     function closeModal() {
@@ -116,7 +116,7 @@ export default function CastVote({proposalId}: {proposalId: number}) {
     const governanceContract = useContext(ContractContext);
 
 
-    const { config, isError, error } = usePrepareContractWrite({
+    const { config } = usePrepareContractWrite({
         address: governanceContract,
         abi: governanceABI,
         functionName: 'castVote',
@@ -126,10 +126,9 @@ export default function CastVote({proposalId}: {proposalId: number}) {
     const { write: castVote } = useContractWrite(config)
 
     const handleVote = () => {
-        console.log(isError)
-        castVote;
-        console.log(vote);
-        console.log(error)
+        if(castVote){
+            castVote();
+        }
         closeModal();
     }
 
