@@ -20,7 +20,7 @@ const plans = [
     },
 ];
 
-export function OyaVote({ vote, setVote}: {proposalId: number, vote: number, setVote: (value: number) => void}) {
+export function OyaVote({ vote, setVote}: {proposalId: string, vote: number, setVote: (value: number) => void}) {
   
 
 
