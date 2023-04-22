@@ -1,49 +1,47 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, type SVGProps, useState } from 'react';
+import { Fragment, type SVGProps, useState, useContext } from 'react';
 import { RadioGroup } from '@headlessui/react';
+import { useContractWrite, usePrepareContractWrite } from 'wagmi';
+import { ContractContext } from '@/context/ContractContext';
+import governanceABI from '@/utils/abis/governanceABI.json';
 
 const plans = [
     {
         name: 'For',
-        ram: '12GB',
-        cpus: '6 CPUs',
-        disk: '160 GB SSD disk',
+        value: 1,
     },
     {
         name: 'Against',
-        ram: '16GB',
-        cpus: '8 CPUs',
-        disk: '512 GB SSD disk',
+        value: 0,
     },
     {
         name: 'Abstain',
-        ram: '32GB',
-        cpus: '12 CPUs',
-        disk: '1024 GB SSD disk',
+        value: 3,
     },
 ];
 
-export function OyaVote() {
-    const [selected, setSelected] = useState(plans[0]);
+export function OyaVote({ vote, setVote}: {proposalId: number, vote: number, setVote: (value: number) => void}) {
+  
+
 
     return (
-        <div className="w-full px-4 py-16">
-            <div className="mx-auto w-full max-w-md">
-                <RadioGroup value={selected} onChange={setSelected}>
+        <div className="w-full px-4 py-16 ">
+            <div className="mx-auto w-full max-w-md ">
+                <RadioGroup value={vote} onChange={setVote}>
                     <RadioGroup.Label className="sr-only">Server size</RadioGroup.Label>
-                    <div className="space-y-2">
+                    <div className="space-y-8">
                         {plans.map((plan) => (
                             <RadioGroup.Option
                                 key={plan.name}
-                                value={plan}
+                                value={plan.value}
                                 className={({ active, checked }) =>
                                     `${active
-                                        ? 'ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300'
+                                        ? 'ring-offset-2 ring-offset-slate-300'
                                         : ''
                                     }
-                  ${checked ? 'bg-sky-900 bg-opacity-75 text-white' : 'bg-white'
+                  ${checked ? 'bg-cyan-500 text-white' : 'bg-white'
                                     }
-                    relative flex cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+                    relative flex cursor-pointer rounded-lg px-5 py-5 shadow-lg focus:outline-none`
                                 }
                             >
                                 {({
@@ -53,7 +51,7 @@ export function OyaVote() {
                                     <>
                                         <div className="flex w-full items-center justify-between">
                                             <div className="flex items-center">
-                                                <div className="text-sm">
+                                                <div className="text-lg">
                                                     <RadioGroup.Label
                                                         as="p"
                                                         className={`font-medium  ${checked ? 'text-white' : 'text-gray-900'
@@ -66,11 +64,7 @@ export function OyaVote() {
                                                         className={`inline ${checked ? 'text-sky-100' : 'text-gray-500'
                                                             }`}
                                                     >
-                                                        <span>
-                                                            {plan.ram}/{plan.cpus}
-                                                        </span>{' '}
-                                                        <span aria-hidden="true">&middot;</span>{' '}
-                                                        <span>{plan.disk}</span>
+                                                        
                                                     </RadioGroup.Description>
                                                 </div>
                                             </div>
@@ -107,7 +101,7 @@ function CheckIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
 }
 
 
-export default function CastVote() {
+export default function CastVote({proposalId}: {proposalId: number}) {
     const [isOpen, setIsOpen] = useState(false);
 
     function closeModal() {
@@ -118,11 +112,32 @@ export default function CastVote() {
         setIsOpen(true);
     }
 
+    const [vote, setVote] = useState<number>(0);
+    const governanceContract = useContext(ContractContext);
+
+
+    const { config, isError, error } = usePrepareContractWrite({
+        address: governanceContract,
+        abi: governanceABI,
+        functionName: 'castVote',
+        args: [proposalId, vote]
+    });
+
+    const { write: castVote } = useContractWrite(config)
+
+    const handleVote = () => {
+        console.log(isError)
+        castVote;
+        console.log(vote);
+        console.log(error)
+        closeModal();
+    }
+
     
 
     return (
         <>
-            <div className="inset-0 flex items-center justify-center">
+            <div className="inset-0 flex items-center justify-center ">
                 <button
                     type="button"
                     onClick={openModal}
@@ -157,7 +172,7 @@ export default function CastVote() {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-50 p-6 text-left align-middle shadow-xl transition-all ">
                                     <Dialog.Title
                                         as="h3"
                                         className="text-2xl font-medium leading-6 text-gray-900"
@@ -165,16 +180,14 @@ export default function CastVote() {
                                         Vote
                                     </Dialog.Title>
                                     <div className="mt-2">
-                                        <div>
-                                            <OyaVote />
-                                        </div>
+                                            <OyaVote proposalId={proposalId} vote={vote} setVote={setVote}/>
                                     </div>
 
-                                    <div className="mt-4">
+                                    <div className="mt-4 w-full">
                                         <button
                                             type="button"
-                                            className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                                            onClick={closeModal}
+                                            className="inline-flex w-full justify-center rounded-md border border-transparent bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2"
+                                            onClick={handleVote}
                                         >
                                             Vote
                                         </button>

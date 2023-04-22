@@ -57,7 +57,6 @@ query Proposals($chainId: ChainID!, $governors: [Address!], $sort: ProposalSort,
         name
         bio
         picture
-        ownedSafes
       }
     }
   }}

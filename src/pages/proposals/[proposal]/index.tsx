@@ -1,6 +1,6 @@
 'use client';
 import DelegateVote from "@/components/molecules/DelegateVote";
-import DisplayVotes from "@/components/molecules/DisplayVote";
+import DisplayVotes from "@/components/molecules/DisplayVotes";
 import useProposalFragment from "@/hooks/useProposalFragment";
 import { useRouter } from "next/router";
 import CastVote from "@/components/modals/CastVote";
@@ -19,7 +19,7 @@ export default function Page() {
                     </h2>
                     <div className="flex gap-4 ">
                         <button className="inline-flex justify-center rounded-lg border py-[calc(theme(spacing.2)-1px)] px-[calc(theme(spacing.3)-1px)] text-sm outline-2 outline-offset-2 transition-colors border-gray-300 text-gray-700 hover:border-gray-400 active:bg-gray-100 active:text-gray-700/80 lg:block">Settings</button>
-                        <CastVote />
+                        <CastVote proposalId={Number(proposalId)} />
                         <DelegateVote />
                     </div>
                 </div>

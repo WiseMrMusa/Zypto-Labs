@@ -5,7 +5,7 @@ export type voteStats = {
     weight: number;
     votes: number;
     percent: number;
-}
+};
 
 export type ProposalType = {
     id: string,
@@ -62,3 +62,14 @@ export type voter = {
     picture: string;
     ownedSafes: string;
 };
+
+// export type proposer = {
+//       activity : {
+//     id: string;
+//     voter: Address;
+//     hash: string;
+//     support: string;
+//     weight: number;
+//     reason: string;
+// }
+    // }
