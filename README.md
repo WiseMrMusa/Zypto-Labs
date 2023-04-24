@@ -1,28 +1,85 @@
-# Create T3 App
+# Zypto DAO
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+### Documentation and Architecture
 
-## What's next? How do I make an app with this?
+## Table of Contents
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+1. Project Overview
+2. System Architecture
+3. Backend Contracts
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Project Overview
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+Zypto is a Decentralized Autonomous Organization that allows members of the community to propose business ideas and raise equity for them. The DAO project is meant to be completed in four days and includes system architecture, user interface and experience design, frontend and backend implementation, and backend contract design.
 
-## Learn More
+## System Architecture
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+The system is made up of four components: the DAO, governance, LaunchPad, and the stake system.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### The DAO
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+To become a member of the DAO community, there are 3 categories of members, the starter,  Investors, and VIPs. you need to pay $2500 or the equivalent in supported cryptocurrency to a specific vault address to be able to join the Investors and VIPs categories. This payment entitles you to receive an exclusive limited amount of governance tokens intended for voting.
 
-## How do I deploy this?
+The DAO token can be exchanged for the governance token, which is used to vote for proposals. Voters, whether for or against a proposal, will be whitelisted to claim an airdrop of the share of the business proposal after Launchpad.
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### Governance
+
+Members of the platform with the governance token can vote for a business proposal to be accepted into the community.
+
+### LaunchPad ICO
+
+When a proposal is accepted, members of the community can then raise the money needed for the company, to have a share of the company.
+
+### Stake System
+
+This is where the shares of each company are managed.
+
+## Backend Contracts
+
+The Zypto DAO consists of six major contracts:
+
+1. ERC20DaoToken
+2. ERC20Voting
+3. Governance
+4. ICO LaunchPad Factory
+5. StakeSystem
+
+These contracts enable the functioning of the DAO and the execution of the LaunchPad ICO.
+
+## ****How it works****
+
+**Joining the DAO**
+
+When joining the DAO, you'll need to get the governanceToken using MATIC. There are three categories of members in the DAO system depending on the subscription plan.
+
+**Starter :** This plan is for the regular community participants (early testers, social media followers) who are interested in joining the decision making the community. They earn portion of the DAOtoken for performing specific tasks in the community
+
+**Investor:** These are the participants that contribute to the DAO vaults, which is use for purpose of the DAO and community development. With the minimum of $100 to get a certain amount of voting units, they have the benefit of taking part not only in the DAO and community development but also in the Investment proposal decisions.
+
+**VIP:** Participants have benefits just like the Investors, but with higher amount of voting unit
+
+The Token page is built for this purpose [here](https://zypto-dun.vercel.app/token).
+
+**Creating a proposal.**
+
+When creating a proposal you'll need to navigate to the [governor](https://zypto-dun.vercel.app/governor) page . On the top-right side, you’ll locate the create new proposal button .
+
+When you finalize your proposal parameters and call submit, you'll need to ensure your balance of governance token is greater than or equal to minProposalAmount (10 tokens by default). When the proposal is being created, the voting starts.
+
+**Voting on a proposal**
+
+When voting on a proposal you'll need to choose the amount of tokens you wish to stake on the proposal as votes. Before then you need to delegate your voting units to your self or any other trusted account to vote on your behalf. Delegating voting units is necessary (even to yourself) before it can be counted as an actual vote.
+
+**Passing a proposal**
+
+In order to "pass" a proposal and therefore executing a proposal, the proposal must contain enough votes to pass quorum. Quorum is the percentage of tokens over circulating supply that are needed to deem a poll executable. If a proposal does not have enough votes to pass quorum, it will be revoked(defeated) upon it's expiration date.
+
+In any case, the advocates (voters) of the proposal will all be refunded their tokens.
+
+**Executing a proposal**
+
+If you are an author of a proposal, you have the ability to execute proposal which will automatically create an ICO launchpad to start the fundraising(Investment) for the project proposed by selling the custom tokens 
+
+**Staking system**
+
+Coming soon…
