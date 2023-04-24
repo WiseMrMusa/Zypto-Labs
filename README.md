@@ -39,9 +39,9 @@ This is where the shares of each company are managed.
 The Zypto DAO consists of six major contracts:
 
 1. ERC20DaoToken
-2. ERC20Voting
-3. Governance
-4. ICO LaunchPad Factory
+2. [ERC20Voting](https://app.bunzz.dev/dapps/5ebc5119-6635-4f66-9ca3-3c60be4bc87b/dashboard) : 0x0555c61C42e52B14eBa7F390B61292c3a230C466
+3. [Governance](https://app.bunzz.dev/dapps/20798e24-7767-4156-ba92-6edef141b465/dashboard): 0xc7b7D49aE778086ABE12A4f9b3549bC09A4499de
+4. [ICO LaunchPad Factory](https://app.bunzz.dev/dapps/0edd84dc-2af8-4602-8aa1-6db79eb92b3f/dashboard) : 0x75cC31EE1c3377125Ff7215b4520BB74543f11D7
 5. StakeSystem
 
 These contracts enable the functioning of the DAO and the execution of the LaunchPad ICO.
@@ -83,3 +83,4 @@ If you are an author of a proposal, you have the ability to execute proposal whi
 **Staking system**
 
 Coming soon…
+
